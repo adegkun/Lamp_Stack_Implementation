@@ -88,3 +88,5 @@ To exit the MySQL console, type:
 ```
 exit;
 ```
+
+# STEP 2 — Install MYSQL
