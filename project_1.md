@@ -14,58 +14,77 @@ LAMP stands for Linux Apache MySQL and PHP. It’s a very common architecture fo
 # Project Recommendations
 It is recommended you have familiarity with the basics of Linux, an understanding of how to configure and download various types of services and formidable researching skills.
 
+# STEP 1 — Install Apache
 
-Follow below steps to install and run nginx container on Ec2
-
-```
-sudo yum update -y
-sudo yum install docker 
-sudo systemctl start docker
-sudo systemctl enable docker
-```
-
-Confirm Docker is running 
-
+Follow below steps to install and run apache linux, I am using an Ubuntu machine on VM.
 
 ```
-systemctl status docker
+sudo apt update 
+sudo apt install apache2 
+sudo systemctl enable apache2
 ```
 
-Pull and Run a nginx container 
+Confirm apache2 is running 
+
 ```
-sudo docker pull nginx
-sudo docker run -p 80:80 --name nginx-server -d nginx
+sudo systemctl status apache2
+```
+![Alt text](images/apache-running.PNG)
+
+Server is running and we can access it locally from an internet browser with the following url. 
+
+To retrive the IP Address of your linux machine run 
+
+```
+ip addr show
+```
+![Alt text](images/ip_addr.PNG)
+
+```
+http://localhost:80
+```
+Congratulations! Our web server is correctly installed
+![Alt text](images/apache-browser.PNG)
+
+# STEP 2 — Install MYSQL
+
+MySQL is an open-source relational database management system. A database management system (DBMS) is a software program that helps organisations optimise, store, retrieve and manage data in a database.
+
+Follow below steps to install MySQL server
+```
+sudo apt install mysql-server
+```
+![Alt text](images/mysql-install.PNG)
+When the installation is finished, log in to the MySQL console by typing:
+
+```
+sudo mysql
+```
+![Alt text](images/mysql-running.PNG)
+
+It’s recommended to change the password of your mysql root user for security reason. This script will remove some insecure default settings and lock down access to your database system.We’re defining this user’s password as password
+
+Run below commands to change password, flush privileges and exit.
+
+```
+alter user 'root'@'localhost' identified with mysql_native_password by "password";
+flush privileges;
+exit;
+```
+![Alt text](images/mysql-sec.PNG)
+
+When you’re finished, test if you’re able to log in to the MySQL console by typing:
+
+```
+sudo mysql -p
 ```
 
-List Docker images  
-```
-sudo docker images 
-```
+Notice the -p flag in this command, which will prompt you for the password used after changing the root user password.
 
-List Running Containers
+![Alt text](images/mysql-confirm.PNG)
+
+To exit the MySQL console, type:
+
 ```
-sudo docker ps
+exit;
 ```
-
-![](imgs/week1/Docker-deployed-on-EC2.PNG)
-
-Stop Running Containers
-```
-sudo docker stop <Container-ID> --- Insert Container ID
-```
-# Deployed app on local machine
-
-I installed docker-desktop on windows and deloyed app on local machine
-
-![](imgs/week1/app-deployed-locally.PNG)
-
-# Push Image to DockerHub
-
-Create a repository for the image in DockerHub
-```
-docker build -t crudbackend-app:1.0 .
-docker image tag crudbackend-app:1.0  adegkun/crudbackend-app:1.0
-docker push adegkun/crudbackend-app:1.0
-```
-![](imgs/week1/DockerHub.PNG)
-
