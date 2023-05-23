@@ -89,4 +89,22 @@ To exit the MySQL console, type:
 exit;
 ```
 
-# STEP 2 — Install MYSQL
+# STEP 2 — Install PHP
+
+A general-purpose open-source scripting language, PHP is especially suited to web development.It powers some of the most popular websites and web applications in the world.
+
+In addition to the php package, you’ll need php-mysql, a PHP module that allows PHP to communicate with MySQL-based databases. You’ll also need libapache2-mod-php to enable Apache to handle PHP files.
+
+To install these 3 packages at once, run:
+
+```
+sudo apt install php libapache2-mod-php php-mysql
+```
+![Alt text](images/php-install.PNG)
+
+Once the installation is finished, you can run the following command to confirm your PHP version:
+
+```
+php -v
+```
+![Alt text](images/php-confirm.PNG)
